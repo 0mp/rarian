@@ -44,6 +44,10 @@ AC_ARG_WITH([metadata-dir],
 	[AC_HELP_STRING([--with-metadata-dir=<path/to/metadata>],
 			[Choose a specific path for metadata [default=<datadir>/help]])], ,
 	with_metadata_dir="$datadir/help")
+AC_ARG_WITH([gnu-getopt],
+	[AC_HELP_STRING([--with-gnu-getopt=<path/getopt>],
+			[Choose a GNU getopt implementation to use [default=getopt]])], ,
+	with_gnu_getopt="getopt")
 
 DISTCHECK_CONFIGURE_FLAGS="--disable-skdb-update"
 AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
@@ -114,6 +118,9 @@ AC_SUBST([LOCALSTATE_SUBDIR])
 
 METADATA_DIR="$with_metadata_dir"
 AC_SUBST([METADATA_DIR])
+
+GNU_GETOPT="$with_gnu_getopt"
+AC_SUBST([GNU_GETOPT])
 
 # Check for existing scrollkeeper install.  If so, we're moving the
 # files and symlinking
