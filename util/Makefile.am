@@ -139,7 +139,7 @@ endif
 	@cd $(DESTDIR)$(bindir); ln -s rarian-sk-rebuild scrollkeeper-rebuilddb
 	@cd $(DESTDIR)$(bindir); ln -s rarian-sk-install scrollkeeper-uninstall
 	@cd $(DESTDIR)$(bindir); ln -s rarian-sk-update scrollkeeper-update
-	@mkdir -p $(DESTDIR)/$(localstatedir)/lib/rarian
+	@mkdir -p $(DESTDIR)/$(localstatedir)/$(LOCALSTATE_SUBDIR)
 if ENABLE_SKDB_UPDATE
 	@echo "Translating current database"
 	@$(DESTDIR)$(bindir)/rarian-sk-update

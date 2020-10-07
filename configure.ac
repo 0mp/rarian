@@ -36,6 +36,10 @@ AC_ARG_WITH([convert-dir],
 	[AC_HELP_STRING([--with-convert-dir=<path/to/omfs>],
 			[Chose a specific path to convert when installed [default=<prefix>/share/omf]])], ,
 	with_convert_dir="$prefix/share/omf")
+AC_ARG_WITH([localstate-subdir],
+	[AC_HELP_STRING([--with-localstate-subdir=<path/to/sub/dir/under/localstatedir>],
+			[Choose a specific sub directory path for localstatedir [default=lib/rarian]])], ,
+	with_localstate_subdir="lib/rarian")
 
 DISTCHECK_CONFIGURE_FLAGS="--disable-skdb-update"
 AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
@@ -100,6 +104,9 @@ fi
 #AC_DEFINE_UNQUOTED(CONVERT_DIR, "$convert_dir", [Choose a directory to convert])
 CONVERT_DIR="$with_convert_dir"
 AC_SUBST([CONVERT_DIR])
+
+LOCALSTATE_SUBDIR="$with_localstate_subdir"
+AC_SUBST([LOCALSTATE_SUBDIR])
 
 # Check for existing scrollkeeper install.  If so, we're moving the
 # files and symlinking
