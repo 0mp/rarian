@@ -34,7 +34,7 @@ AC_ARG_ENABLE([skdb-update],
 	enable_skdb_update=yes)
 AC_ARG_WITH([convert-dir],
 	[AC_HELP_STRING([--with-convert-dir=<path/to/omfs>],
-			[Chose a specific path to convert when installed [default=<prefix>/share/omf]])], ,
+			[Choose a specific path to convert when installed [default=<prefix>/share/omf]])], ,
 	with_convert_dir="$prefix/share/omf")
 AC_ARG_WITH([localstate-subdir],
 	[AC_HELP_STRING([--with-localstate-subdir=<path/to/sub/dir/under/localstatedir>],
