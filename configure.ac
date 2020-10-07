@@ -40,6 +40,10 @@ AC_ARG_WITH([localstate-subdir],
 	[AC_HELP_STRING([--with-localstate-subdir=<path/to/sub/dir/under/localstatedir>],
 			[Choose a specific sub directory path for localstatedir [default=lib/rarian]])], ,
 	with_localstate_subdir="lib/rarian")
+AC_ARG_WITH([metadata-dir],
+	[AC_HELP_STRING([--with-metadata-dir=<path/to/metadata>],
+			[Choose a specific path for metadata [default=<datadir>/help]])], ,
+	with_metadata_dir="$datadir/help")
 
 DISTCHECK_CONFIGURE_FLAGS="--disable-skdb-update"
 AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
@@ -107,6 +111,9 @@ AC_SUBST([CONVERT_DIR])
 
 LOCALSTATE_SUBDIR="$with_localstate_subdir"
 AC_SUBST([LOCALSTATE_SUBDIR])
+
+METADATA_DIR="$with_metadata_dir"
+AC_SUBST([METADATA_DIR])
 
 # Check for existing scrollkeeper install.  If so, we're moving the
 # files and symlinking
