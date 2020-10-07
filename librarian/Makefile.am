@@ -29,5 +29,5 @@ librarian_la_SOURCES  +=  	\
     $(top_srcdir)/util/tinyxmlerror.cpp	
 endif
 
-librarian_la_CFLAGS = -DDATADIR=\""$(datadir)"\" -DSYSCONFDIR=\""$(sysconfdir)"\" -DI_KNOW_RARIAN_0_8_IS_UNSTABLE
+librarian_la_CFLAGS = -DDATADIR=\""$(datadir)"\" -DSYSCONFDIR=\""$(sysconfdir)"\" -DI_KNOW_RARIAN_0_8_IS_UNSTABLE -DDEFAULT_DATA_DIR=\""${DEFAULT_DATA_DIRS}"\"
 librarian_la_LDFLAGS = -export-symbols-regex "^rrn_.*"
