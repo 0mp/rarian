@@ -142,8 +142,7 @@ setup_man_path ()
     if (!input || *input == '\0') {
       if (input)
 	free(input);
-      /* Hard coded default.  Don't argue. */
-      input = strdup ("/usr/share/man:/usr/man:/usr/local/share/man:/usr/local/man");
+      input = strdup ("@DEFAULT_MANPATH@");
     }
     colon = input;
 

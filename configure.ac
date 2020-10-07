@@ -48,6 +48,18 @@ AC_ARG_WITH([gnu-getopt],
 	[AC_HELP_STRING([--with-gnu-getopt=<path/getopt>],
 			[Choose a GNU getopt implementation to use [default=getopt]])], ,
 	with_gnu_getopt="getopt")
+AC_ARG_WITH([default-data-dirs],
+	[AC_HELP_STRING([--with-default-data-dirs=<path/to/default/data/dirs>],
+			[Set the default list of data directories [default=/usr/local/share:/usr/share]])], ,
+	with_default_data_dirs="/usr/local/share:/usr/share")
+AC_ARG_WITH([default-manpath],
+	[AC_HELP_STRING([--with-default-manpath=<default/manpath>],
+			[Set the default of MANPATH [default=/usr/share/man:/usr/man:/usr/local/share/man:/usr/local/man]])], ,
+	with_default_manpath="/usr/share/man:/usr/man:/usr/local/share/man:/usr/local/man")
+AC_ARG_WITH([default-infopath],
+	[AC_HELP_STRING([--with-default-infopath=<default/infopath>],
+			[Set the default INFOPATH [default=/usr/info:/usr/share/info:/usr/local/info:/usr/local/share/info]])], ,
+	with_default_infopath="/usr/info:/usr/share/info:/usr/local/info:/usr/local/share/info")
 
 DISTCHECK_CONFIGURE_FLAGS="--disable-skdb-update"
 AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
@@ -121,6 +133,15 @@ AC_SUBST([METADATA_DIR])
 
 GNU_GETOPT="$with_gnu_getopt"
 AC_SUBST([GNU_GETOPT])
+
+DEFAULT_DATA_DIRS="$with_default_data_dirs"
+AC_SUBST([DEFAULT_DATA_DIRS])
+
+DEFAULT_MANPATH="$with_default_manpath"
+AC_SUBST([DEFAULT_MANPATH])
+
+DEFAULT_INFOPATH="$with_default_infopath"
+AC_SUBST([DEFAULT_INFOPATH])
 
 # Check for existing scrollkeeper install.  If so, we're moving the
 # files and symlinking
@@ -209,6 +230,9 @@ AC_CONFIG_FILES([Makefile
                  data/Makefile
 		 docs/Makefile
                  librarian/Makefile
+                 librarian/rarian-info.c
+                 librarian/rarian-main.c
+                 librarian/rarian-man.c
                  util/Makefile
  		 util/rarian-sk-update
 		 util/rarian-sk-install

@@ -565,7 +565,7 @@ sanity_check_categories ()
 static void
 rrn_info_init (void)
 {
-  char *default_dirs = "/usr/info:/usr/share/info:/usr/local/info:/usr/local/share/info";
+  char *default_dirs = "@DEFAULT_INFOPATH@";
   char *info_dirs = NULL;
   char *split = NULL;
   int free_info_dirs = FALSE;
