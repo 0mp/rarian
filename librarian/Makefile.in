@@ -108,7 +108,7 @@ DIST_COMMON = $(srcdir)/Makefile.am $(pkginclude_HEADERS) \
 	$(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = rarian-info.c rarian-main.c rarian-man.c
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -253,7 +253,9 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 ETAGS = etags
 CTAGS = ctags
-am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
+am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/rarian-info.c.in \
+	$(srcdir)/rarian-main.c.in $(srcdir)/rarian-man.c.in \
+	$(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
@@ -275,6 +277,9 @@ CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
+DEFAULT_DATA_DIRS = @DEFAULT_DATA_DIRS@
+DEFAULT_INFOPATH = @DEFAULT_INFOPATH@
+DEFAULT_MANPATH = @DEFAULT_MANPATH@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DISTCHECK_CONFIGURE_FLAGS = @DISTCHECK_CONFIGURE_FLAGS@
@@ -291,6 +296,7 @@ ENABLE_SKDB_UPDATE = @ENABLE_SKDB_UPDATE@
 ENABLE_SK_COMPAT = @ENABLE_SK_COMPAT@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
+GNU_GETOPT = @GNU_GETOPT@
 GREP = @GREP@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -304,11 +310,13 @@ LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
 LIPO = @LIPO@
 LN_S = @LN_S@
+LOCALSTATE_SUBDIR = @LOCALSTATE_SUBDIR@
 LTLIBOBJS = @LTLIBOBJS@
 LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
+METADATA_DIR = @METADATA_DIR@
 MKDIR_P = @MKDIR_P@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -393,7 +401,7 @@ librarian_la_SOURCES = rarian.h rarian-main.h rarian-main.c \
 	rarian-reg-utils.h rarian-reg-utils.c rarian-language.c \
 	rarian-language.h rarian-utils.h rarian-utils.c rarian-info.h \
 	rarian-info.c rarian-man.c rarian-man.h $(am__append_1)
-librarian_la_CFLAGS = -DDATADIR=\""$(datadir)"\" -DSYSCONFDIR=\""$(sysconfdir)"\" -DI_KNOW_RARIAN_0_8_IS_UNSTABLE
+librarian_la_CFLAGS = -DDATADIR=\""$(datadir)"\" -DSYSCONFDIR=\""$(sysconfdir)"\" -DI_KNOW_RARIAN_0_8_IS_UNSTABLE -DDEFAULT_DATA_DIR=\""${DEFAULT_DATA_DIRS}"\"
 librarian_la_LDFLAGS = -export-symbols-regex "^rrn_.*"
 all: all-am
 
@@ -428,6 +436,12 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
+rarian-info.c: $(top_builddir)/config.status $(srcdir)/rarian-info.c.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+rarian-main.c: $(top_builddir)/config.status $(srcdir)/rarian-main.c.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+rarian-man.c: $(top_builddir)/config.status $(srcdir)/rarian-man.c.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 
 install-libLTLIBRARIES: $(lib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)

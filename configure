@@ -638,6 +638,12 @@ have_bash
 ENABLE_EXTRACT_FALSE
 ENABLE_EXTRACT_TRUE
 have_xslt
+DEFAULT_INFOPATH
+DEFAULT_MANPATH
+DEFAULT_DATA_DIRS
+GNU_GETOPT
+METADATA_DIR
+LOCALSTATE_SUBDIR
 CONVERT_DIR
 ENABLE_SKDB_UPDATE
 ENABLE_SKDB_UPDATE_FALSE
@@ -794,6 +800,12 @@ enable_scrollkeeper_compat
 enable_omf_read
 enable_skdb_update
 with_convert_dir
+with_localstate_subdir
+with_metadata_dir
+with_gnu_getopt
+with_default_data_dirs
+with_default_manpath
+with_default_infopath
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1460,8 +1472,26 @@ Optional Packages:
   --with-sysroot[=DIR]    Search for dependent libraries within DIR (or the
                           compiler's sysroot if not specified).
   --with-convert-dir=<path/to/omfs>
-                          Chose a specific path to convert when installed
+                          Choose a specific path to convert when installed
                           [default=<prefix>/share/omf]
+  --with-localstate-subdir=<path/to/sub/dir/under/localstatedir>
+                          Choose a specific sub directory path for
+                          localstatedir [default=lib/rarian]
+  --with-metadata-dir=<path/to/metadata>
+                          Choose a specific path for metadata
+                          [default=<datadir>/help]
+  --with-gnu-getopt=<path/getopt>
+                          Choose a GNU getopt implementation to use
+                          [default=getopt]
+  --with-default-data-dirs=<path/to/default/data/dirs>
+                          Set the default list of data directories
+                          [default=/usr/local/share:/usr/share]
+  --with-default-manpath=<default/manpath>
+                          Set the default of MANPATH
+                          [default=/usr/share/man:/usr/man:/usr/local/share/man:/usr/local/man]
+  --with-default-infopath=<default/infopath>
+                          Set the default INFOPATH
+                          [default=/usr/info:/usr/share/info:/usr/local/info:/usr/local/share/info]
 
 Some influential environment variables:
   CC          C compiler command
@@ -15859,6 +15889,54 @@ else
 fi
 
 
+# Check whether --with-localstate-subdir was given.
+if test "${with_localstate_subdir+set}" = set; then :
+  withval=$with_localstate_subdir;
+else
+  with_localstate_subdir="lib/rarian"
+fi
+
+
+# Check whether --with-metadata-dir was given.
+if test "${with_metadata_dir+set}" = set; then :
+  withval=$with_metadata_dir;
+else
+  with_metadata_dir="$datadir/help"
+fi
+
+
+# Check whether --with-gnu-getopt was given.
+if test "${with_gnu_getopt+set}" = set; then :
+  withval=$with_gnu_getopt;
+else
+  with_gnu_getopt="getopt"
+fi
+
+
+# Check whether --with-default-data-dirs was given.
+if test "${with_default_data_dirs+set}" = set; then :
+  withval=$with_default_data_dirs;
+else
+  with_default_data_dirs="/usr/local/share:/usr/share"
+fi
+
+
+# Check whether --with-default-manpath was given.
+if test "${with_default_manpath+set}" = set; then :
+  withval=$with_default_manpath;
+else
+  with_default_manpath="/usr/share/man:/usr/man:/usr/local/share/man:/usr/local/man"
+fi
+
+
+# Check whether --with-default-infopath was given.
+if test "${with_default_infopath+set}" = set; then :
+  withval=$with_default_infopath;
+else
+  with_default_infopath="/usr/info:/usr/share/info:/usr/local/info:/usr/local/share/info"
+fi
+
+
 DISTCHECK_CONFIGURE_FLAGS="--disable-skdb-update"
 
 
@@ -15993,6 +16071,24 @@ fi
 
 #AC_DEFINE_UNQUOTED(CONVERT_DIR, "$convert_dir", [Choose a directory to convert])
 CONVERT_DIR="$with_convert_dir"
+
+
+LOCALSTATE_SUBDIR="$with_localstate_subdir"
+
+
+METADATA_DIR="$with_metadata_dir"
+
+
+GNU_GETOPT="$with_gnu_getopt"
+
+
+DEFAULT_DATA_DIRS="$with_default_data_dirs"
+
+
+DEFAULT_MANPATH="$with_default_manpath"
+
+
+DEFAULT_INFOPATH="$with_default_infopath"
 
 
 # Check for existing scrollkeeper install.  If so, we're moving the
@@ -16167,7 +16263,7 @@ done
 
 # Checks for library functions.
 
-ac_config_files="$ac_config_files Makefile rarian.pc data/Makefile docs/Makefile librarian/Makefile util/Makefile util/rarian-sk-update util/rarian-sk-install util/rarian-sk-rebuild util/rarian-sk-config util/rarian-sk-get-scripts util/rarian-sk-extract util/rarian-sk-get-content-list util/rarian-sk-get-extended-content-list docs/rarian.document"
+ac_config_files="$ac_config_files Makefile rarian.pc data/Makefile docs/Makefile librarian/Makefile librarian/rarian-info.c librarian/rarian-main.c librarian/rarian-man.c util/Makefile util/rarian-sk-update util/rarian-sk-install util/rarian-sk-rebuild util/rarian-sk-config util/rarian-sk-get-scripts util/rarian-sk-extract util/rarian-sk-get-content-list util/rarian-sk-get-extended-content-list docs/rarian.document"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -17327,6 +17423,9 @@ do
     "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
     "docs/Makefile") CONFIG_FILES="$CONFIG_FILES docs/Makefile" ;;
     "librarian/Makefile") CONFIG_FILES="$CONFIG_FILES librarian/Makefile" ;;
+    "librarian/rarian-info.c") CONFIG_FILES="$CONFIG_FILES librarian/rarian-info.c" ;;
+    "librarian/rarian-main.c") CONFIG_FILES="$CONFIG_FILES librarian/rarian-main.c" ;;
+    "librarian/rarian-man.c") CONFIG_FILES="$CONFIG_FILES librarian/rarian-man.c" ;;
     "util/Makefile") CONFIG_FILES="$CONFIG_FILES util/Makefile" ;;
     "util/rarian-sk-update") CONFIG_FILES="$CONFIG_FILES util/rarian-sk-update" ;;
     "util/rarian-sk-install") CONFIG_FILES="$CONFIG_FILES util/rarian-sk-install" ;;
