@@ -22,7 +22,7 @@ if [ -e $statedir/rarian-update-mtimes ]
 then
     for x in $(grep -e '^0:@:' $statedir/rarian-update-mtimes)
     do
-	if [[ $convert_string != "REPLACEME" ]]
+	if [ "$convert_string" != "REPLACEME" ]
 	then
 	    convert_string=$convert_string:${x##0:@:}
 	else
